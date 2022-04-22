@@ -12,9 +12,15 @@ pipeline {
                 checkout scm
             }
         }
+    stages {
+        stage("Get cluster credentials") {
+            steps {
+                sh "/usr/bin/local/gcloud container clusters get-credentials homedepot-342320-gke --region=us-east1"
+            }
+        }
         stage("Deploy app to GKE") {
             steps {
-                sh "kubectl apply -f k8s-deployment.yaml"
+                sh "/usr/bin/local/kubectl apply -f k8s-deployment.yaml"
             }
         }
     }   
