@@ -24,12 +24,12 @@ pipeline {
         }
         stage("Docker Tag") {
             steps {
-                sh "docker tag chatapp1:v1 us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v2"               
+                sh "/usr/local/bin/docker tag chatapp1:v1 us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v2"               
             }
         }
         stage("Docker Push") {
             steps {
-                sh "docker push us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v2"               
+                sh "/usr/local/bin/docker push us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v2"               
             }
         }
         stage("Get cluster credentials") {
