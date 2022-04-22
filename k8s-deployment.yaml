@@ -1,0 +1,73 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "chatapp-config-i9hv"
+  namespace: "default"
+  labels:
+    app: "chatapp"
+data:
+  env: "dev"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "chatapp"
+  namespace: "default"
+  labels:
+    app: "chatapp"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "chatapp"
+  template:
+    metadata:
+      labels:
+        app: "chatapp"
+    spec:
+      containers:
+      - name: "chatapp-sha256-1"
+        image: "us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp:v1"
+        env:
+        - name: "env"
+          valueFrom:
+            configMapKeyRef:
+              key: "env"
+              name: "chatapp-config-i9hv"
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "chatapp-service"
+  namespace: "default"
+  labels:
+    app: "chatapp"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 8080
+  selector:
+    app: "chatapp"
+  type: "LoadBalancer"
+  loadBalancerIP: ""
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "chatapp-hpa-nilp"
+  namespace: "default"
+  labels:
+    app: "chatapp"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "chatapp"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
