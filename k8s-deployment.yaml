@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: "chatapp-sha256-1"
-        image: "us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp:v1"
+        image: "us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v2"
         env:
         - name: "env"
           valueFrom:
