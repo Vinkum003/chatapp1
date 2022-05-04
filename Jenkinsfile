@@ -39,7 +39,7 @@ pipeline {
         }
         stage("Deploy app to GKE") {
             steps {
-                sh "/usr/local/bin/helm install mychart /Users/vinod.avinane/Desktop/Study/Kaizen/chatapp1/helm/chatapphelm/ --values /Users/vinod.avinane/Desktop/Study/Kaizen/chatapp1/helm/chatapphelm/values.yaml"
+                sh "/usr/local/bin/helm upgrade -install mychart /Users/vinod.avinane/Desktop/Study/Kaizen/chatapp1/helm/chatapphelm/ --values /Users/vinod.avinane/Desktop/Study/Kaizen/chatapp1/helm/chatapphelm/values.yaml"
             }
         }   
     }
