@@ -10,7 +10,7 @@ steps:
   args: ['auth', 'configure-docker', 'us-east1-docker.pkg.dev']
 # Deploy container image to Cloud Run
 - name: gcr.io/cloud-builders/gcloud
-  args: ['run', 'deploy', 'chatapp1', '--image', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3', '--region', 'us-east1','--min-instances','1','--max-instances','10','--project','homedepot-342320','--allow-unauthenticated']
+  args: ['run', 'deploy', 'chatapp1', '--image', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3', '--region', 'us-east1','--min-instances','1','--max-instances','10','--allow-unauthenticated']
 images:
 - us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3
 
