@@ -1,18 +1,18 @@
 steps:
 # Dockerize the app and tag
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3', '.' ]
+  args: [ 'build', '-t', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v4', '.' ]
 # Push docker images to Artifact registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3' ]
+  args: [ 'push', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v4' ]
 # Authentication to Artifact registry
 - name: gcr.io/cloud-builders/gcloud
   args: ['auth', 'configure-docker', 'us-east1-docker.pkg.dev']
 # Deploy container image to Cloud Run
 - name: gcr.io/cloud-builders/gcloud
-  args: ['run', 'deploy', 'chatapp1', '--image', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3', '--region', 'us-east1','--min-instances','1','--max-instances','10','--project','homedepot-342320','--allow-unauthenticated']
+  args: ['run', 'deploy', 'chatapp1', '--image', 'us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v4', '--region', 'us-east1','--min-instances','1','--max-instances','10','--allow-unauthenticated']
 images:
-- us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v3
+- us-east1-docker.pkg.dev/homedepot-342320/vinkumorg/chatapp1:v4
 
 # # Test
 # - name: 'gcr.io/cloud-builders/docker'
